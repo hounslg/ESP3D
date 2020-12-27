@@ -148,7 +148,7 @@
 #define MAX_FW_ID 6
 
 //For FW which has issue with checksum or not handling M110 properly///////
-//#define DISABLE_SERIAL_CHECKSUM
+#define DISABLE_SERIAL_CHECKSUM
 
 //Do not Edit after this line //////////////////////////////////////////////
 
