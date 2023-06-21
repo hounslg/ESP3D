@@ -3,8 +3,8 @@
 [Latest stable release ![Release Version](https://img.shields.io/github/release/luc-github/ESP3D.svg?style=plastic) ![Release Date](https://img.shields.io/github/release-date/luc-github/ESP3D.svg?style=plastic)](https://github.com/luc-github/ESP3D/releases/latest/) [![github-ci](https://github.com/luc-github/ESP3D/workflows/build-ci-2.0/badge.svg)](https://github.com/luc-github/ESP3D/actions/workflows/build-ci-2.0.yml) [![Release Version](https://img.shields.io/github/v/release/luc-github/ESP3D-WEBUI?color=green&include_prereleases&label=WebUI&style=plastic)](https://github.com/luc-github/ESP3D-WEBUI/tree/2.1)      
 please use Arduino ide 1.8.9+ with [![Release Version](https://img.shields.io/badge/ESP32-1.0.4-green?style=plastic)](https://github.com/espressif/arduino-esp32/releases/tag/1.0.4) or [![Release Version](https://img.shields.io/badge/ESP8266-2.5.2-green?style=plastic)](https://github.com/esp8266/Arduino/releases/tag/2.5.2)
 
-[Latest development version ![Development Version](https://img.shields.io/badge/Devt-v3.0-yellow?style=plastic) ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/luc-github/ESP3D/3.0?style=plastic)](https://github.com/luc-github/ESP3D/tree/3.0) [![github-ci](https://github.com/luc-github/ESP3D/workflows/build-ci/badge.svg)](https://github.com/luc-github/ESP3D/actions/workflows/build-ci.yml) [![Development  Version](https://img.shields.io/badge/Devt-v3.0-yellow?style=plastic&label=WebUI)](https://github.com/luc-github/ESP3D-WEBUI/tree/3.0)   
-please use Arduino ide 1.8.9+ with [![Release Version](https://img.shields.io/badge/ESP32-git-yellow?style=plastic&logo=github)](https://github.com/espressif/arduino-esp32) or [![Release Version](https://img.shields.io/badge/ESP8266-git-yellow?style=plastic&logo=github)](https://github.com/esp8266/Arduino/)
+[Latest development version ![Development Version](https://img.shields.io/badge/Devt-v3.0-yellow?style=plastic) ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/luc-github/ESP3D/3.0?style=plastic)](https://github.com/luc-github/ESP3D/tree/3.0) [![Travis (.org) branch](https://img.shields.io/travis/luc-github/ESP3D/3.0?style=plastic)](https://travis-ci.org/luc-github/ESP3D) [![Development  Version](https://img.shields.io/badge/Devt-v3.0-yellow?style=plastic&label=WebUI)](https://github.com/luc-github/ESP3D-WEBUI/tree/3.0)   
+
 
 [All releases](https://github.com/luc-github/ESP3D/releases)
 
@@ -71,30 +71,7 @@ if Authentication is enabled :
 Check wiki : https://github.com/luc-github/ESP3D/wiki/Direct-ESP3D-commands
 
 ## Installation
-Feedback on 2.0 was : ESP3D being a library is not really useful and make setup more complex, so now we are back to simple application.   
-
-1. If you haven't already set up Arduino IDE for ESPs then do so for [ESP8266](https://github.com/esp8266/Arduino) or [ESP32 core version](https://github.com/espressif/arduino-esp32).
-2. Download the [latest release](https://github.com/luc-github/ESP3D/releases/) and manually copy the libraries present in the `ESP3D-x.y.z/libraries` directory into your `Arduino/libraries` directory.  (*no need if using platformIO*).  *These versions are verified to work with ESP3D, any others (newer version) may cause untested behavior.*
-- Use webserver support (recommended as stable), asyncwebserver support is no longer stable on ESP3D 
-- * arduinoWebSockets from @Links2004
- 
-Generic ones:      
-Specific for ESP32    
-* ESP32SSDP
-If you want OLED support:  
-* oled-ssd1306 from @squix78    
-
-If you want DHT11/22 support:  
-* DHT_sensor_library_for_ESPx from @beegee-tokyo   
-3. Compile project esp3d.ino according target: ESP8266 board or ESP32 board, please review config.h to enable disable a feature, by default athentication is disabled and most others are enabled.   
-* for ESP8266 set CPU freq to 160MHz for better (https://github.com/luc-github/ESP3D/wiki/Install-Instructions)
-4. Upload the data content on ESP3D file system
-* Using SPIFFS uploader, this plugin and install instructions is available on each ESP core - please refere to it
-or
-* Using embedded uploader (you may need to format SPIFFS using : [ESP710]FORMAT on ESP8266 first)    
-if embedded uploader does not show up you can force it ti display using : http://your_IP_address?forcefallback=yes    
-<img src=https://raw.githubusercontent.com/luc-github/ESP3D/2.1/images/docs/embedded.png><br>
-
+Please go to [httpd://esp3d.io](http://esp3d.io/esp3d/v2.x/index.html) for latest notes on instalation and documentation
 
 ## Update
 * Generate a binary using the export binary menu from Arduino IDE and upload it using ESP-WEBUI or embedded interface  
