@@ -1,6 +1,6 @@
 <span align="left"><img src="https://github.com/luc-github/ESP3D/blob/2.1/images/ESP3D.png" width="200px"/></span><span align="left">Firmware for ESP8266/ESP8285  and ESP32 used with 3D printer</span>  
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-22-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-26-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [<img src="https://img.shields.io/liberapay/patrons/ESP3D.svg?logo=liberapay">](https://liberapay.com/ESP3D)
 
@@ -8,9 +8,14 @@
 please use Arduino ide 1.8.9+ with [![Release Version](https://img.shields.io/badge/ESP32-1.0.4-green?style=plastic)](https://github.com/espressif/arduino-esp32/releases/tag/1.0.4) or [![Release Version](https://img.shields.io/badge/ESP8266-2.5.2-green?style=plastic)](https://github.com/esp8266/Arduino/releases/tag/2.5.2)
 
 [Latest development version ![Development Version](https://img.shields.io/badge/Devt-v3.0-yellow?style=plastic) ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/luc-github/ESP3D/3.0?style=plastic)](https://github.com/luc-github/ESP3D/tree/3.0) [![github-ci](https://github.com/luc-github/ESP3D/workflows/build-ci/badge.svg)](https://github.com/luc-github/ESP3D/actions/workflows/build-ci.yml) [![Development  Version](https://img.shields.io/badge/Devt-v3.0-yellow?style=plastic&label=WebUI)](https://github.com/luc-github/ESP3D-WEBUI/tree/3.0)   
-please use Arduino ide 1.8.9+ with [![Release Version](https://img.shields.io/badge/ESP32-git-yellow?style=plastic&logo=github)](https://github.com/espressif/arduino-esp32) or [![Release Version](https://img.shields.io/badge/ESP8266-git-yellow?style=plastic&logo=github)](https://github.com/esp8266/Arduino/) [![Project Page ESP3D 3.0](https://img.shields.io/badge/Project%20page-ESP3D%203.0-blue)](https://github.com/users/luc-github/projects/1/views/1)
+please use Arduino ide 1.8.9+ with [![Release Version](https://img.shields.io/badge/ESP32-2.0.8-yellow?style=plastic&logo=github)](https://github.com/espressif/arduino-esp32) or [![Release Version](https://img.shields.io/badge/ESP8266-3.1.1-yellow?style=plastic&logo=github)](https://github.com/esp8266/Arduino/) [![Project Page ESP3D 3.0](https://img.shields.io/badge/Project%20page-ESP3D%203.0-blue)](https://github.com/users/luc-github/projects/1/views/1)
 
 [All releases](https://github.com/luc-github/ESP3D/releases)
+
+> [!WARNING]
+>### Disclaimer
+> The software is provided 'as is,' without any warranty of any kind, expressed or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the software or the use or other dealings in the software.
+>It is essential that you carefully read and understand this disclaimer before using this software and its components. If you do not agree with any part of this disclaimer, please refrain from using the software.  
 
 This firmware allows not only to have a cheap bridge between Wifi and serial, but also to have a web UI to configure wifi, to monitor 3D printer and even control it, and to make things easy,
 UI is fully customizable without reflashing FW.
@@ -21,6 +26,8 @@ I currently use it with my personnal flavor of [repetier for Due based boards](h
 The web interface files are present in data directory but UI has it's own repository [ESP3D-WEBUI](https://github.com/luc-github/ESP3D-WEBUI).
 * Be aware  ESP3D-WEBUI is for firmware 0.9.99 minimum - previous released version use tpl files which are no more used.
 * Note for ESP8266 1MB flash : FW is now too big will all features you need to chose strip the FW and select only some features, also WebUI is now also too big for full multilanguage support to fit the 128K SPIFFS so please use pack with limited language (en +another) https://github.com/luc-github/ESP3D-WEBUI/tree/2.1/languages
+
+This branch does not take any new features, only bug fix, for new feature please use https://github.com/luc-github/ESP3D/tree/3.0, thank you.    
     
 
 ## Sponsors 
@@ -73,13 +80,36 @@ if Authentication is enabled :
 
 
 ## Direct commands:    
-Check wiki : https://github.com/luc-github/ESP3D/wiki/Command-line-commands
+Check [Documentation](http://esp3d.io/esp3d/v2.x/documentation/commands/index.html)
 
 ## Installation instructions
-See [Wiki](https://github.com/luc-github/ESP3D/wiki/Install-Instructions)
+See [Documentation](http://esp3d.io/esp3d/v2.x/installation/index.html)
 
 ## Installation
-Please go to [httpd://esp3d.io](http://esp3d.io/esp3d/v2.x/index.html) for latest notes on instalation and documentation
+Feedback on 2.0 was : ESP3D being a library is not really useful and make setup more complex, so now we are back to simple application.   
+
+1. If you haven't already set up Arduino IDE for ESPs then do so for [ESP8266](https://github.com/esp8266/Arduino) or [ESP32 core version](https://github.com/espressif/arduino-esp32).
+2. Download the [latest release](https://github.com/luc-github/ESP3D/releases/) and manually copy the libraries present in the `ESP3D-x.y.z/libraries` directory into your `Arduino/libraries` directory.  (*no need if using platformIO*).  *These versions are verified to work with ESP3D, any others (newer version) may cause untested behavior.*
+- Use webserver support (recommended as stable), asyncwebserver support is no longer stable on ESP3D 
+- * arduinoWebSockets from @Links2004
+ 
+Generic ones:      
+Specific for ESP32    
+* ESP32SSDP
+If you want OLED support:  
+* oled-ssd1306 from @squix78    
+
+If you want DHT11/22 support:  
+* DHT_sensor_library_for_ESPx from @beegee-tokyo   
+3. Compile project esp3d.ino according target: ESP8266 board or ESP32 board, please review config.h to enable disable a feature, by default athentication is disabled and most others are enabled.   
+* for ESP8266 set CPU freq to 160MHz for better   
+4. Upload the data content on ESP3D file system
+* Using SPIFFS uploader, this plugin and install instructions is available on each ESP core - please refere to it
+or
+* Using embedded uploader (you may need to format SPIFFS using : [ESP710]FORMAT on ESP8266 first)    
+if embedded uploader does not show up you can force it ti display using : http://your_IP_address?forcefallback=yes    
+<img src=https://raw.githubusercontent.com/luc-github/ESP3D/2.1/images/docs/embedded.png><br>
+
 
 ## Update
 * Generate a binary using the export binary menu from Arduino IDE and upload it using ESP-WEBUI or embedded interface  
@@ -90,17 +120,19 @@ Please go to [httpd://esp3d.io](http://esp3d.io/esp3d/v2.x/index.html) for lates
 * To style the code before pushing PR please use [astyle --style=otbs *.h *.cpp *.ino](http://astyle.sourceforge.net/)   
 * The embedded page is created using nodejs then gulp to generate a compressed html page (tool.html.gz), all necessary modules will be installed using the build.bat, you also need bin2c tool (https://sourceforge.net/projects/bin2c/) to generate the h file from the binary,  installation and build is done using the build.bat.   
 * The corresponding UI is located [here](https://github.com/luc-github/ESP3D-WEBUI/tree/2.1)
-* An optional UI was development using old repetier UI - check [UI\repetier\testui.htm] (https://raw.githubusercontent.com/wiki/luc-github/ESP3D/UI/repetier/testui.htm) file   
+
 
  
 ## Need more information about supported boards or wiring ?
-[Check the wiki](https://github.com/luc-github/ESP3D/wiki)
+Check [Hardware support](http://esp3d.io/esp3d/v2.x/hardware/index.html) and [Wiring support](http://esp3d.io/esp3d/v2.x/installation/wiring/index.html)
 
 ## :question:Any question ?   
-Check [Wiki](https://github.com/luc-github/ESP3D/wiki/Install-Instructions) or Join the chat at [![Discord server](https://img.shields.io/discord/752822148795596940?color=blue&label=discord&logo=discord)](https://discord.gg/Z4ujTwE)   
+Check [Documentation](http://esp3d.io/esp3d/v2.x/index.html) or Join the chat at [![Discord server](https://img.shields.io/discord/752822148795596940?color=blue&label=discord&logo=discord)](https://discord.gg/Z4ujTwE)  
+
+The reference site: http://esp3d.io/
 
 ## :exclamation:Any issue/feedback ?    
-Check [Wiki](https://github.com/luc-github/ESP3D/wiki/Install-Instructions) and [FAQ](https://github.com/luc-github/ESP3D/discussions?discussions_q=category%3AF.A.Q) 
+Check [FAQ](https://github.com/luc-github/ESP3D/discussions?discussions_q=category%3AF.A.Q) 
 If you still have issue: [submit ticket](https://github.com/luc-github/ESP3D/issues)    
 If it is not an issue join discussion [here](https://github.com/luc-github/ESP3D/discussions)
 
@@ -166,6 +198,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="http://www.bigtree-tech.com"><img src="https://avatars.githubusercontent.com/u/38851044?v=4?s=100" width="100px;" alt="BIGTREETECH"/><br /><sub><b>BIGTREETECH</b></sub></a><br /><a href="#platform-bigtreetech" title="Packaging/porting to new platform">📦</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/dbuezas"><img src="https://avatars.githubusercontent.com/u/777196?v=4?s=100" width="100px;" alt="David Buezas"/><br /><sub><b>David Buezas</b></sub></a><br /><a href="https://github.com/luc-github/ESP3D/commits?author=dbuezas" title="Code">💻</a> <a href="https://github.com/luc-github/ESP3D/issues?q=author%3Adbuezas" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://engineer2designer.blogspot.com"><img src="https://avatars.githubusercontent.com/u/25747949?v=4?s=100" width="100px;" alt="E2D"/><br /><sub><b>E2D</b></sub></a><br /><a href="https://github.com/luc-github/ESP3D/commits?author=Engineer2Designer" title="Code">💻</a> <a href="https://github.com/luc-github/ESP3D/issues?q=author%3AEngineer2Designer" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/rondlh"><img src="https://avatars.githubusercontent.com/u/77279634?v=4?s=100" width="100px;" alt="rondlh"/><br /><sub><b>rondlh</b></sub></a><br /><a href="https://github.com/luc-github/ESP3D/commits?author=rondlh" title="Code">💻</a> <a href="https://github.com/luc-github/ESP3D/issues?q=author%3Arondlh" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Levak"><img src="https://avatars.githubusercontent.com/u/2292040?v=4?s=100" width="100px;" alt="Levak"/><br /><sub><b>Levak</b></sub></a><br /><a href="https://github.com/luc-github/ESP3D/commits?author=Levak" title="Code">💻</a> <a href="https://github.com/luc-github/ESP3D/issues?q=author%3ALevak" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>
